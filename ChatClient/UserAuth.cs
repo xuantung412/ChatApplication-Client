@@ -38,9 +38,6 @@ namespace ChatClient
         {
             base.OnShown(e);
 
-
-
-
             //User login. Send message
             string messageString = "/CheckUser-" + this.usernameTextBox.Text + "-" + this.passwordTextBox.Text;
             var checkAuth = Encoding.ASCII.GetBytes(messageString);

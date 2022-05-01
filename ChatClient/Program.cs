@@ -18,7 +18,7 @@ namespace ChatClient
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Application.Run(new UserAuth());
+                Application.Run(new Form1("Guest"));
             }
             catch(Exception e)
             {

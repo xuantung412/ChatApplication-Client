@@ -39,9 +39,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveChatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.authorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SendFileFunction = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numberOfThread = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +105,8 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.SendFileFunction});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(885, 24);
@@ -118,18 +124,9 @@
             // saveChatToolStripMenuItem1
             // 
             this.saveChatToolStripMenuItem1.Name = "saveChatToolStripMenuItem1";
-            this.saveChatToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveChatToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.saveChatToolStripMenuItem1.Text = "Save Chat";
             this.saveChatToolStripMenuItem1.Click += new System.EventHandler(this.saveChatToolStripMenuItem1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(684, 509);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Version: 1.0";
             // 
             // aboutToolStripMenuItem
             // 
@@ -142,9 +139,53 @@
             // authorToolStripMenuItem
             // 
             this.authorToolStripMenuItem.Name = "authorToolStripMenuItem";
-            this.authorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.authorToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.authorToolStripMenuItem.Text = "Author";
             this.authorToolStripMenuItem.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
+            // 
+            // SendFileFunction
+            // 
+            this.SendFileFunction.Name = "SendFileFunction";
+            this.SendFileFunction.Size = new System.Drawing.Size(66, 20);
+            this.SendFileFunction.Text = "Send File";
+            this.SendFileFunction.Click += new System.EventHandler(this.SendFileFunction_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(684, 509);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Version: 1.0";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(166, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Number Of Thread";
+            // 
+            // numberOfThread
+            // 
+            this.numberOfThread.Location = new System.Drawing.Point(187, 12);
+            this.numberOfThread.MaxLength = 1;
+            this.numberOfThread.Name = "numberOfThread";
+            this.numberOfThread.Size = new System.Drawing.Size(45, 20);
+            this.numberOfThread.TabIndex = 8;
+            this.numberOfThread.Text = "1";
+            this.numberOfThread.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 
@@ -152,6 +193,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 532);
+            this.Controls.Add(this.numberOfThread);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.SendButton);
@@ -185,6 +228,11 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem authorToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem SendFileFunction;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox numberOfThread;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
     }
 }
 

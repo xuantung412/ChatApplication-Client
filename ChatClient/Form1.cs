@@ -17,7 +17,9 @@ namespace ChatClient
         /// Buffer to store incoming messages from the server.
         /// </summary>
         byte[] _buffer = new byte[4096];
-
+        string requestFile = "";
+        string[] listOfSentString;
+        double localDate;
         public Form1(String userName)
         {
             InitializeComponent();
@@ -30,7 +32,6 @@ namespace ChatClient
             base.OnShown(e);
 
             // Connect to the remote server. The IP address and port # could be
-            // picked up from a settings file.
             _client.Connect("127.0.0.1", 54000);
 
             // Start reading the socket and receive any incoming messages
@@ -52,14 +53,60 @@ namespace ChatClient
                     Array.Copy(_buffer, 0, tmp, 0, bytesIn);
                     var str = Encoding.ASCII.GetString(tmp);
 
-                    // Any actions that involve interacting with the UI must be done
-                    // on the main thread. This method is being called on a worker
-                    // thread so using the form's BeginInvoke() method is vital to
-                    // ensure that the action is performed on the main thread.
+
+
                     BeginInvoke((Action)(() =>
                     {
-                        ChatListBox.Items.Add(str);
-                        ChatListBox.SelectedIndex = ChatListBox.Items.Count - 1;
+                        if (str.Contains("/WordSuggestionOutput"))
+                        {//Yes It is a system message with file formate.
+                            str = str.Remove(0, 23);
+                            string[] listOfString = str.Split('-');
+                            string docPath = Directory.GetCurrentDirectory();
+                            // Write the string array to a new file named "outputFile.txt" as a backup.
+                            using (StreamWriter outputFile = new StreamWriter(requestFile))
+                            {
+                                int i = 0;
+                                outputFile.WriteLine("Line No.\tMisspelt Word\t\tSuggestion\n");
+
+                                foreach (string line in listOfString)
+                                {
+                                    try
+                                    {   //Adjust /tab for each line base on length of string to create a good format in .txt file.
+                                        if(listOfSentString[i*2].ToString().Length < 8)
+                                        {
+                                            outputFile.WriteLine("   " + (i + 1) + "\t\t" + this.listOfSentString[i * 2] + "\t\t\t" + line);   
+                                        }
+                                        else
+                                        {
+                                            outputFile.WriteLine("   " + (i + 1) + "\t\t" + this.listOfSentString[i * 2] + "\t\t" + line);
+
+                                        }
+
+                                    }
+                                    catch(Exception e)
+                                    {
+                                    }
+                                    i++;
+
+                                }
+                                //Get the current time when finish all jobs.
+                                string processingTime = Math.Round((DateTimeOffset.Now.ToUnixTimeMilliseconds() - localDate) / 1000, 3) + " seconds";
+
+                                outputFile.WriteLine("\nTotal processing time = " + processingTime);
+                            }
+
+
+                            //Open outputFile
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(requestFile) { UseShellExecute = true });
+
+                        }
+                        else
+                        {
+                            //Check where is a system message or message from other client:
+                            ChatListBox.Items.Add(str);
+                            ChatListBox.SelectedIndex = ChatListBox.Items.Count - 1;
+                        }
+
                     }));
                 }
 
@@ -110,6 +157,27 @@ namespace ChatClient
             if(e.KeyCode == Keys.Enter)
             {
                 this.SendButton.PerformClick();
+            }
+        }
+
+        //The basic idea is client chat application will open and read and text file, then transfer content of text file to sever. 
+        //Sever will identify It is a text file and proceed it.
+        private void SendFileFunction_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileSelection = new OpenFileDialog();
+            //fileSelection.ShowDialog();
+            fileSelection.Title = "Open Text File";
+            fileSelection.Filter = "TXT files|*.txt";   //Retrected to .txt file only
+            //Open dialog to select a file
+            if (fileSelection.ShowDialog() == DialogResult.OK)
+            {
+                string text = System.IO.File.ReadAllText(fileSelection.FileName.ToString());
+                var msg = Encoding.ASCII.GetBytes( this.numberOfThread.Text.ToString()+"/File:\t" + text);
+                requestFile = fileSelection.FileName;
+                File.Delete(requestFile);
+                this.listOfSentString = text.Split(new[] { '\r', '\n' });
+                _client.GetStream().Write(msg, 0, msg.Length);
+                localDate = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             }
         }
     }
