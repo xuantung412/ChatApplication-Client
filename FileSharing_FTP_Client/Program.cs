@@ -1,10 +1,16 @@
-﻿using System;
+﻿/**
+ * User: crossdeck
+ * Published: 3 Jul 2016
+ * Title: file-transfer-p2p
+ * Link: https://github.com/crossdeck/file-transfer-p2p
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChatClient
+namespace FileSharing_FTP_Client
 {
     static class Program
     {
@@ -16,14 +22,7 @@ namespace ChatClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            try
-            {
-                Application.Run(new Welcome());
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.ToString(), "NO CONNECTION ! PLEASE OPEN REMOTE SERVER. THANKS!");
-            }
+            Application.Run(new Client());
         }
     }
 }

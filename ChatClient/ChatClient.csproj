@@ -59,7 +59,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>resources\InternalChatApplicationicon.ico</ApplicationIcon>
@@ -103,6 +103,12 @@
     <Compile Include="UserAuth.Designer.cs">
       <DependentUpon>UserAuth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Welcome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Welcome.Designer.cs">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,7 +127,9 @@
     <EmbeddedResource Include="UserAuth.resx">
       <DependentUpon>UserAuth.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ChatClient_TemporaryKey.pfx" />
+    <EmbeddedResource Include="Welcome.resx">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,6 +158,20 @@
   <ItemGroup>
     <Content Include="InternalChatApplicationicon.ico" />
     <Content Include="resources\InternalChatApplicationicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business_Layer\Business_Layer.csproj">
+      <Project>{2cf193ba-a0ea-4548-8696-97b7d15e8538}</Project>
+      <Name>Business_Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileSharing_FTP_Client\FileSharing_FTP_Client.csproj">
+      <Project>{997329eb-11ee-4473-92fe-b7b2a3434309}</Project>
+      <Name>FileSharing_FTP_Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileSharing_FTP_Server\FileSharing_FTP_Server.csproj">
+      <Project>{2e426c40-ac43-4e27-b3c1-9d7fe330163e}</Project>
+      <Name>FileSharing_FTP_Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
